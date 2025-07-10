@@ -1,1 +1,1 @@
-modified vigenere cipher, includes padding, garbage characters, and extended key options
+modified vigenere cipher, includes padding padding and garbage characters
