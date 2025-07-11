@@ -111,15 +111,20 @@ def generate_random_printable(length):
         printable = printable + chr(letter)
     return printable
 
-#the key is any random assortment of atleast 2(?) lowercase letters
-key = valid_key_generator(key_length=20)
-message = "Hello, World! This message and all its punctuation will be encrypted."
+#choice = input("> 1. Encrypt\n> 2. Decrypt\n> ")
 
-print(f"the message is '{message}' and the key is '{key}'\n")
+def recursive_stupid_fuck(choice):
+    if choice == "1":
+        message = input("> Plaintext: ")
+        key = input("> Key: ")
+        print(f"> Ciphertext:\n> {encrypt(message, key)}")
+    elif choice == "2":
+        print("> Plaintext\n> " + decrypt(input("> Ciphertext: "), key=key))
+    else:
+        pass
+    recursive_stupid_fuck(input("> "))
 
-enc_message = encrypt(message, key)
-print(f"the encrypted message is: {enc_message}\n")
+recursive_stupid_fuck(input("> 1. Encrypt\n> 2. Decrypt\n> "))   
 
-print(f'the decrypted message is: {decrypt(enc_message, key)}')
 
-    
+
