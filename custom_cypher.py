@@ -64,14 +64,14 @@ def encrypt (message, key):
     encrypted_message = encrypted_message + pad_front
     
     for character in message:
-        if key_index>=len(key)-2:
+        if key_index>=len(key):
             key_index = 0
         #does a caesar cipher on the current char from the message, 
         #converts a letter from the key into an ascii int code for the shift
         true_char = caesar_enc(character, ord(key[key_index]))
         
         key_index = key_index+1
-        if key_index>=len(key)-2:
+        if key_index>=len(key):
             key_index = 0
         #uses the a random letter from the message as the character that is shifed 
         #uses the next letter in the key's ascii code as the shift
@@ -91,10 +91,12 @@ def decrypt(enc_message, key):
     
     # increments at +2 because the encrypt function uses a new letter from the key for every character, including garbage characters
     for char in enc_message:
-        if key_index>=len(key)-2:
+        if key_index>=len(key):
             key_index = 0
         dec_message = dec_message + caesar_dec(char, ord(key[key_index]))
         key_index = key_index+2
+        if key_index>len(key) and len(key) % 2 != 0:
+            key_index = 1
     return dec_message
 
 #removes the garbage characters at both ends and then removes the garbage characters after every true character
@@ -111,7 +113,7 @@ def generate_random_printable(length):
         printable = printable + chr(letter)
     return printable
 
-#choice = input("> 1. Encrypt\n> 2. Decrypt\n> ")
+
 
 def recursive_stupid_fuck(choice):
     if choice == "1":
@@ -119,7 +121,9 @@ def recursive_stupid_fuck(choice):
         key = input("> Key: ")
         print(f"> Ciphertext:\n> {encrypt(message, key)}")
     elif choice == "2":
-        print("> Plaintext\n> " + decrypt(input("> Ciphertext: "), key=key))
+        cipher_text = input("> Ciphertext: ")
+        key = input("> Key: ")
+        print(f"> Plaintext: \n> {decrypt(cipher_text,key)}")
     else:
         pass
     recursive_stupid_fuck(input("> "))
